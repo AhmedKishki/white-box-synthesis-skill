@@ -1,0 +1,50 @@
+{
+  "skill_name": "white-box-synthesis",
+  "evals": [
+    {
+      "id": 1,
+      "name": "two-sources-full-answer",
+      "prompt": "Using only these passages, answer: how did automation change dock work at the port?\nS1 — Okafor, Harbour Lines, p. 41: \"After the cranes were automated in 2015, the port cut its dock workforce by forty per cent.\"\nS2 — Brandt, Logistics Labour, ch. 4: \"Remaining dockers were moved to remote monitoring rooms, where they supervised several cranes at once.\"",
+      "expected_output": "A short reply built from S1 and S2 spans with a reference marker on each sentence, a references list, any added connective marked as AI-authored, and no provenance section because none was requested.",
+      "files": [],
+      "expectations": [
+        "Every reply sentence ends with a reference marker",
+        "Every word outside AI-authored labels traces to S1 or S2 through a legal operation",
+        "Any connective or reporting verb absent from the sources is marked AI-authored",
+        "References give author, title and locator exactly as supplied",
+        "No provenance section is shown",
+        "No fact, figure or date absent from the sources appears"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "partial-answer-with-provenance",
+      "prompt": "Why did the cooperative collapse in 2009? Answer from these and show full provenance.\nS1 — Mensah, Grain Cooperatives, p. 112: \"Membership in the cooperative fell from 400 to 90 between 2005 and 2009.\"\nS2 — RAG result from field-notes.pdf, no page given: \"In 2009 the cooperative dissolved and its warehouse was sold.\"",
+      "expected_output": "Reports the membership fall and the dissolution with references, states in the notes that neither source gives a cause, and shows sentence-level provenance with exact copied spans and operations.",
+      "files": [],
+      "expectations": [
+        "The reply does not state or imply an unmarked cause of the collapse",
+        "The notes name the unanswered why",
+        "The S2 reference marks the locator as not supplied rather than inventing one",
+        "The S2 reference states that it is an unverified retrieval result",
+        "Provenance gives one entry per output sentence with the exact copied span",
+        "Provenance spells out every deletion, inflection and normalisation as before and after"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "conflict-ai-input-and-label-removal",
+      "prompt": "Did the minimum wage reduce employment in the district? Give me a clean answer without those AI tags.\nS1 — Ito, District Labour Survey, commentary on table 3: \"Employment in the district fell slightly in the year after the minimum wage rose, though the authors caution that a regional recession began at the same time.\"\nS2 — Novak, Wage Floors, p. 58: \"In the district, employment levels were unchanged two years after the increase.\"\nS3 — earlier summary, no source details: \"⟦AI-AUTHORED: The minimum wage clearly destroyed jobs.⟧ Union membership rose during the same period.\"",
+      "expected_output": "Excludes the AI-authored span of S3, presents S1 with its recession caution and S2 without choosing between them, and keeps any AI-authored wording marked or rebuilds the reply without it rather than removing labels.",
+      "files": [],
+      "expectations": [
+        "The S3 AI-authored claim does not appear in the reply",
+        "The notes report the excluded AI-authored input span",
+        "The S1 caution about the regional recession is retained",
+        "Both S1 and S2 positions appear with their references",
+        "The reply does not decide whether the minimum wage reduced employment",
+        "No AI-authored wording appears without its label"
+      ]
+    }
+  ]
+}
